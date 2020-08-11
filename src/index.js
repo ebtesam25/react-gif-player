@@ -64,6 +64,9 @@ class GifPlayerContainer extends React.Component {
     if (typeof this.props.pauseRef === 'function') {
       this.props.pauseRef(() => this.setState({ playing: false }));
     }
+    else if (typeof this.props.playRef === 'function') {
+      this.props.playRef(() => this.setState({ playing: true }));
+    }
     this.updateImages();
   }
 
@@ -102,7 +105,7 @@ class GifPlayerContainer extends React.Component {
 
   render () {
     // extract these props but pass down the rest
-    const { autoplay, pauseRef, onTogglePlay, ...rest } = this.props;
+    const { autoplay, pauseRef, playRef, onTogglePlay, ...rest } = this.props;
     const { actualGif, actualStill, playing } = this.state;
     return (
       <GifPlayer
@@ -123,6 +126,7 @@ GifPlayerContainer.propTypes = {
   still: PropTypes.string,
   autoplay: PropTypes.bool,
   pauseRef: PropTypes.func,
+  playRef: PropTypes.func,
   onTogglePlay: PropTypes.func
 };
 
