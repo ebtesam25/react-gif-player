@@ -76,6 +76,12 @@ class GifPlayerContainer extends React.Component {
     if (prevState.playing !== this.state.playing && typeof onTogglePlay === 'function') {
       onTogglePlay(this.state.playing);
     }
+    if (typeof this.props.pauseRef === 'function' && this.state.playing) {
+      this.props.pauseRef(() => this.setState({ playing: false }));
+    }
+    else if (typeof this.props.pauseRef === 'function' && !this.state.playing) {
+      this.props.pauseRef(() => this.setState({ playing: true }));
+    }
   }
 
   updateImages (prevState = {}) {
